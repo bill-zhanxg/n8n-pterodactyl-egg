@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH node:slim
+FROM --platform=$TARGETOS/$TARGETARCH node:24-slim
 LABEL author="Bill Zhang" maintainer="contact@mail.bill-zhanxg.com"
 LABEL org.opencontainers.image.title="n8n"
 LABEL org.opencontainers.image.description="Workflow Automation Tool"

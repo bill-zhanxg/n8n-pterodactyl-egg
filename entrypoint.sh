@@ -1,86 +1,86 @@
 #!/bin/bash
 cd /home/container
 
-# Imprimir as informações de arranque
+# Print startup information
 echo "┌──────────────────────────────────────────┐"
 echo "│                                          │"
 echo "│       N8N Pterodactyl by Eletriom        │"
 echo "│                                          │"
 echo "└──────────────────────────────────────────┘"
-echo "Versão do N8N: ${N8N_VERSION}"
+echo "N8N Version: ${N8N_VERSION}"
 
-# Diretório de dados padrão
+# Default data directory
 export N8N_USER_FOLDER="/home/container/.n8n"
 mkdir -p "${N8N_USER_FOLDER}"
 
-# Configuração de IP/Porta através do ambiente do Pterodactyl
+# Configure IP/Port via Pterodactyl environment
 export N8N_HOST=${SERVER_IP}
 export N8N_PORT=${SERVER_PORT}
 
-# Definição do protocolo com suporte a variável de ambiente
+# Set protocol with environment variable support
 if [ -n "${N8N_PROTOCOL}" ]; then
-    echo "Usando protocolo definido: ${N8N_PROTOCOL}"
+    echo "Using defined protocol: ${N8N_PROTOCOL}"
 else
     export N8N_PROTOCOL="http"
-    echo "Usando protocolo padrão: ${N8N_PROTOCOL}"
+    echo "Using default protocol: ${N8N_PROTOCOL}"
 fi
 
-# Definição do cookie seguro com suporte a variável de ambiente
+# Set secure cookie with environment variable support
 if [ -n "${N8N_SECURE_COOKIE}" ]; then
-    echo "Usando configuração de cookie seguro definida: ${N8N_SECURE_COOKIE}"
+    echo "Using defined secure cookie setting: ${N8N_SECURE_COOKIE}"
 else
     export N8N_SECURE_COOKIE="false"
-    echo "Usando configuração de cookie seguro padrão: ${N8N_SECURE_COOKIE}"
+    echo "Using default secure cookie setting: ${N8N_SECURE_COOKIE}"
 fi
 
-# Definição de variáveis para o Webhook URL baseado no ambiente
+# Set variables for Webhook URL based on environment
 if [ -n "${HOSTNAME}" ] && [ -n "${N8N_PORT}" ]; then
     export N8N_WEBHOOK_URL="${N8N_PROTOCOL}://${HOSTNAME}:${N8N_PORT}/"
     echo "Webhook URL: ${N8N_WEBHOOK_URL}"
 else
-    echo "Aviso: HOSTNAME ou N8N_PORT não definidos. Webhook URL não configurado automaticamente."
+    echo "Warning: HOSTNAME or N8N_PORT not set. Webhook URL not configured automatically."
 fi
 
-# Configuração da zona de tempo
+# Timezone configuration
 if [ -n "${GENERIC_TIMEZONE}" ]; then
     export TZ=${GENERIC_TIMEZONE}
-    echo "Timezone definida para: ${TZ}"
+    echo "Timezone set to: ${TZ}"
 fi
 
-# Se estiver definido usar SQLite
+# Use SQLite if configured
 if [ "${N8N_DB_TYPE}" = "sqlite" ]; then
     export N8N_DB_TYPE=sqlite
     export N8N_DB_SQLITE_PATH="${N8N_USER_FOLDER}/database.sqlite"
-    echo "Usando SQLite: ${N8N_DB_SQLITE_PATH}"
+    echo "Using SQLite: ${N8N_DB_SQLITE_PATH}"
 fi
 
-# Verificando se devemos usar a porta personalizada
+# Check if we should use a custom port
 if [ -n "${N8N_PORT}" ]; then
-    echo "Porta personalizada: ${N8N_PORT}"
+    echo "Custom port: ${N8N_PORT}"
 fi
 
-# Configuração para permissões de arquivo
+# Configuration for file permissions
 if [ -n "${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}" ]; then
-    echo "Configuração de permissões de arquivo: ${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}"
+    echo "File permissions configuration: ${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}"
 else
     export N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true"
-    echo "Aplicando permissões seguras para arquivos de configuração: ${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}"
+    echo "Applying secure permissions for configuration files: ${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}"
 fi
 
-# Configuração para ativação dos task runners
+# Configuration to enable task runners
 if [ -n "${N8N_RUNNERS_ENABLED}" ]; then
-    echo "Configuração de task runners: ${N8N_RUNNERS_ENABLED}"
+    echo "Task runners configuration: ${N8N_RUNNERS_ENABLED}"
 else
     export N8N_RUNNERS_ENABLED="true"
-    echo "Ativando task runners: ${N8N_RUNNERS_ENABLED}"
+    echo "Enabling task runners: ${N8N_RUNNERS_ENABLED}"
 fi
 
-# Executar o n8n
+# Run n8n
 if [ -z "$@" ] || [ "$1" = "bash" ] || [ "$1" = "/entrypoint.sh" ]; then
-    echo "Iniciando n8n..."
+    echo "Starting n8n..."
     exec n8n start
 else
-    # Se foram passados argumentos específicos, execute-os
-    echo "Executando comando personalizado: $@"
+    # If specific arguments were passed, execute them
+    echo "Executing custom command: $@"
     exec $@
 fi

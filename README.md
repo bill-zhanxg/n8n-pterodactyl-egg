@@ -1,134 +1,135 @@
-# N8N para Pterodactyl
+# n8n for Pterodactyl
 
 ![N8N Logo](https://n8n.io/images/n8n-logo.png)
 
-## Sobre o Projeto
+## About the Project
 
-Este repositório contém uma implementação do N8N ([https://n8n.io/](https://n8n.io/)) otimizada para execução em servidores [Pterodactyl](https://pterodactyl.io/). O N8N é uma poderosa plataforma de automação de fluxo de trabalho que permite conectar diferentes sistemas e serviços sem precisar de conhecimentos de programação.
+This repository contains an implementation of n8n ([https://n8n.io/](https://n8n.io/)) optimized to run on [Pterodactyl](https://pterodactyl.io/) servers. n8n is a powerful workflow automation platform that lets you connect different systems and services without needing programming knowledge.
 
-## Características
+## Features
 
-- Imagem Docker otimizada para Pterodactyl
-- Configuração automática de ambiente via variáveis
-- Suporte a SQLite para armazenamento local
-- Configuração de segurança pré-definida
-- Suporte a task runners para melhor desempenho
+- Docker image optimized for Pterodactyl
+- Automatic environment configuration via variables
+- SQLite support for local storage
+- Predefined security configuration
+- Task runner support for better performance
 
-## Requisitos
+## Requirements
 
-- Servidor Pterodactyl
-- Egg compatível para N8N
-- Pelo menos 1GB de RAM recomendado
-- 2 vCPUs recomendados
+- Pterodactyl server
+- Compatible n8n egg
+- At least 1GB RAM recommended
+- 2 vCPUs recommended
 
-## Instalação
+## Installation
 
-1. Importe o arquivo egg-n8n.json no seu painel Pterodactyl
-2. Crie um novo servidor usando o egg
-3. Inicie o servidor
+1. Import the `egg-n8n.json` file into your Pterodactyl panel
+2. Create a new server using the egg
+3. Start the server
 
-## Variáveis de Ambiente
+## Environment Variables
 
-| Variável | Descrição | Valor Padrão |
-|----------|-----------|--------------|
-| `N8N_VERSION` | Versão do N8N a ser instalada | latest |
-| `N8N_PROTOCOL` | Protocolo HTTP ou HTTPS | http |
-| `N8N_SECURE_COOKIE` | Uso de cookies seguros | false |
-| `GENERIC_TIMEZONE` | Timezone do servidor | UTC |
-| `N8N_DB_TYPE` | Tipo de banco de dados | sqlite |
-| `N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS` | Forçar permissões seguras | true |
-| `N8N_RUNNERS_ENABLED` | Ativar task runners | true |
+| Variable                                | Description                | Default Value |
+| --------------------------------------- | -------------------------- | ------------- |
+| `N8N_VERSION`                           | n8n version to install     | latest        |
+| `N8N_PROTOCOL`                          | HTTP or HTTPS protocol     | http          |
+| `N8N_SECURE_COOKIE`                     | Use secure cookies         | false         |
+| `GENERIC_TIMEZONE`                      | Server timezone            | UTC           |
+| `N8N_DB_TYPE`                           | Database type              | sqlite        |
+| `N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS` | Enforce secure permissions | true          |
+| `N8N_RUNNERS_ENABLED`                   | Enable task runners        | true          |
 
-## Uso
+## Usage
 
-Após a instalação, acesse o N8N através do endereço:
+After installation, access n8n at:
 
 ```
-http://seu-servidor:porta
+http://your-server:port
 ```
 
-Na primeira execução, você precisará configurar um usuário administrador.
+On first run, you’ll need to set up an admin user.
 
-## Persistência
+## Persistence
 
-Os dados são armazenados em:
+Data is stored at:
 
 ```
 /home/container/.n8n/
 ```
 
-Certifique-se de que este diretório esteja configurado para backup no Pterodactyl.
+Make sure this directory is included in backups in Pterodactyl.
 
-## Exemplos de Uso
+## Example Use Cases
 
-Aqui estão alguns exemplos do que você pode fazer com N8N:
+Here are some examples of what you can do with n8n:
 
-- Integrar dados entre sistemas (Stripe, Shopify, Google Sheets)
-- Criar automações para mídias sociais
-- Implementar alertas e notificações para sistemas
-- Sincronizar dados entre diferentes serviços
-- Realizar processamento de dados automatizado
+- Integrate data between systems (Stripe, Shopify, Google Sheets)
+- Create social media automations
+- Implement alerts and notifications for systems
+- Sync data across different services
+- Perform automated data processing
 
-## Atualizando
+## Updating
 
-Para atualizar o N8N para uma nova versão:
+To update n8n to a new version:
 
-1. Acesse o painel do Pterodactyl
-2. Pare o servidor
-3. Atualize a variável de ambiente `N8N_VERSION` para a versão desejada
-4. Reinicie o servidor
+1. Go to the Pterodactyl panel
+2. Stop the server
+3. Update the `N8N_VERSION` environment variable to the desired version
+4. Restart the server
 
-## Segurança
+## Security
 
-Recomendações para aumentar a segurança:
+Recommendations to increase security:
 
-- Configure o `N8N_PROTOCOL` como `https` se tiver um certificado
-- Use senhas fortes para seu usuário administrador
-- Limite o acesso ao seu servidor N8N via firewall
-- Considere a implementação de autenticação externa
+- Set `N8N_PROTOCOL` to `https` if you have a certificate
+- Use strong passwords for your admin user
+- Limit access to your n8n server via firewall
+- Consider implementing external authentication
 
-## Perguntas Frequentes (FAQ)
+## Frequently Asked Questions (FAQ)
 
-**P: O N8N suporta bancos de dados externos?**  
-R: Sim, você pode configurar MySQL, PostgreSQL ou outros bancos suportados através das variáveis de ambiente.
+**Q: Does n8n support external databases?**  
+A: Yes. You can configure MySQL, PostgreSQL, or other supported databases via environment variables.
 
-**P: É possível executar tarefas em segundo plano?**  
-R: Sim, os task runners estão habilitados por padrão para execução eficiente.
+**Q: Can I run tasks in the background?**  
+A: Yes. Task runners are enabled by default for efficient execution.
 
-**P: Como faço backup dos meus fluxos de trabalho?**  
-R: Configure backups regulares do diretório `/home/container/.n8n/` no painel do Pterodactyl.
+**Q: How do I back up my workflows?**  
+A: Configure regular backups of the `/home/container/.n8n/` directory in the Pterodactyl panel.
 
-## Recursos Adicionais
+## Additional Resources
 
-- [Documentação Oficial do N8N](https://docs.n8n.io/)
-- [Comunidade N8N](https://community.n8n.io/)
-- [Documentação do Pterodactyl](https://pterodactyl.io/project/introduction.html)
-- [Tutoriais em Vídeo (YouTube)](https://www.youtube.com/c/n8n_io)
+- [n8n Official Documentation](https://docs.n8n.io/)
+- [n8n Community](https://community.n8n.io/)
+- [Pterodactyl Documentation](https://pterodactyl.io/project/introduction.html)
+- [Video Tutorials (YouTube)](https://www.youtube.com/c/n8n_io)
 
-## Solução de Problemas
+## Troubleshooting
 
-- **Erro de conexão**: Verifique se as portas estão corretamente configuradas no Pterodactyl.
-- **Erro de memória**: Aumente a alocação de memória do servidor.
-- **Webhook não funciona**: Verifique a configuração da variável `N8N_WEBHOOK_URL`.
-- **Erro ao iniciar**: Verifique os logs do servidor para identificar o problema específico.
-- **Performance lenta**: Aumente os recursos alocados para o servidor ou otimize seus fluxos de trabalho.
+- **Connection error**: Check that ports are correctly configured in Pterodactyl.
+- **Out of memory**: Increase the server’s memory allocation.
+- **Webhook not working**: Check the `N8N_WEBHOOK_URL` variable configuration.
+- **Startup error**: Check the server logs to identify the specific issue.
+- **Slow performance**: Increase server resources or optimize your workflows.
 
-## Limitações Conhecidas
+## Known Limitations
 
-- Em servidores com recursos limitados, fluxos de trabalho complexos podem sofrer com timeouts
-- Alguns nós específicos do N8N podem exigir configurações adicionais para funcionar corretamente
-- O acesso SSH ao contêiner pode ser necessário para depuração avançada
+- On resource-constrained servers, complex workflows may experience timeouts
+- Some specific n8n nodes may require additional configuration to work properly
+- SSH access to the container may be necessary for advanced debugging
 
-## Contribuindo
+## Contributing
 
-Contribuições são bem-vindas! Por favor, envie um pull request ou abra uma issue para discutir alterações propostas.
+Contributions are welcome! Please open a pull request or an issue to discuss proposed changes.
 
-## Licença
+## License
 
-Este projeto é distribuído sob a mesma licença do N8N. Veja mais detalhes no [site oficial do N8N](https://n8n.io/licensing/).
+This project is distributed under the same license as n8n. See more details on the [official n8n website](https://n8n.io/licensing/).
 
-## Créditos
+## Credits
 
-- [N8N](https://n8n.io/) - Plataforma de automação de fluxo de trabalho
-- [Pterodactyl](https://pterodactyl.io/) - Plataforma de gerenciamento de servidores
-- [Eletriom](https://eletriom.com.br) - Autor desta implementação 
+- [n8n](https://n8n.io/) - Workflow automation platform
+- [Pterodactyl](https://pterodactyl.io/) - Server management platform
+- [Eletriom](https://eletriom.com.br) - Author of this implementation
+- [Bill](https://bill-zhanxg.com) - Current maintainer

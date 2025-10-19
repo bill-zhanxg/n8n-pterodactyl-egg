@@ -1,34 +1,34 @@
-FROM --platform=$TARGETOS/$TARGETARCH node:20-slim
-LABEL author="Eletriom" maintainer="eletriom@eletriom.com.br"
+FROM --platform=$TARGETOS/$TARGETARCH node:slim
+LABEL author="Bill Zhang" maintainer="contact@mail.bill-zhanxg.com"
 LABEL org.opencontainers.image.title="n8n"
 LABEL org.opencontainers.image.description="Workflow Automation Tool"
 LABEL org.opencontainers.image.source="https://github.com/n8n-io/n8n"
 LABEL org.opencontainers.image.url="https://n8n.io"
 
-# Variáveis
+# Variables
 ARG N8N_VERSION=latest
 ENV N8N_VERSION=${N8N_VERSION}
 ENV NODE_ENV=production
 ENV N8N_RELEASE_TYPE=stable
 ENV USER=container HOME=/home/container
 
-# Instala dependências
+# Install dependencies
 RUN apt update && apt -y install \
     git gcc g++ ca-certificates dnsutils curl iproute2 ffmpeg procps tini wget tar sqlite3 \
     && useradd -m -d /home/container container
 
-# Instala o n8n
+# Install n8n
 RUN npm install -g --omit=dev n8n@${N8N_VERSION} --ignore-scripts \
     && npm rebuild --prefix=/usr/local/lib/node_modules/n8n sqlite3 \
     && rm -rf /usr/local/lib/node_modules/n8n/node_modules/@n8n/chat \
-              /usr/local/lib/node_modules/n8n/node_modules/@n8n/design-system \
-              /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/node_modules \
-              /root/.npm \
+    /usr/local/lib/node_modules/n8n/node_modules/@n8n/design-system \
+    /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/node_modules \
+    /root/.npm \
     && find /usr/local/lib/node_modules/n8n -type f \( -name "*.ts" -o -name "*.js.map" -o -name "*.vue" \) -delete
 
-# Baixa o task-runner-launcher
+# Download the task-runner-launcher
 ARG TARGETPLATFORM
-ARG LAUNCHER_VERSION=1.1.2
+ARG LAUNCHER_VERSION=1.4.0
 COPY n8n-task-runners.json /etc/n8n-task-runners.json
 RUN \
     if [ "$TARGETPLATFORM" = "linux/amd64" ]; then export ARCH_NAME="amd64"; \
@@ -41,11 +41,11 @@ RUN \
     tar xvf task-runner-launcher-${LAUNCHER_VERSION}-linux-${ARCH_NAME}.tar.gz -C /usr/local/bin && \
     cd / && rm -rf /launcher-temp
 
-# Copia o entrypoint para o Pterodactyl
+# Copy the entrypoint for Pterodactyl
 COPY --chown=container:container ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Define permissões e shell
+# Set permissions and shell
 RUN mkdir /home/container/.n8n && chown container:container /home/container/.n8n
 WORKDIR /home/container
 USER container

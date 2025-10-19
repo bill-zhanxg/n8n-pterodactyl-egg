@@ -1,62 +1,63 @@
-# Contribuindo com o Projeto
+# Contributing to the Project
 
-Agradecemos seu interesse em contribuir com o nosso projeto N8N para Pterodactyl! Este documento fornece orientações sobre como você pode ajudar.
+Thank you for your interest in contributing to our n8n for Pterodactyl project! This document provides guidance on how you can help.
 
-## Como Contribuir
+## How to Contribute
 
-### Reportando Bugs
+### Reporting Bugs
 
-1. Verifique se o bug já não foi reportado na seção de Issues.
-2. Use o template de bug report para criar uma nova issue.
-3. Inclua o máximo de detalhes possível:
-   - Passos para reproduzir
-   - Comportamento esperado vs. atual
-   - Logs relevantes
-   - Ambiente (versão do N8N, sistema operacional, etc.)
+1. Check if the bug has already been reported in the Issues section.
+2. Use the bug report template to create a new issue.
+3. Include as many details as possible:
+   - Steps to reproduce
+   - Expected vs. actual behavior
+   - Relevant logs
+   - Environment (n8n version, operating system, etc.)
 
-### Sugerindo Melhorias
+### Suggesting Improvements
 
-1. Verifique a lista de issues para ver se sua sugestão já existe.
-2. Crie uma nova issue usando o template de feature request.
-3. Descreva claramente a melhoria e como ela beneficiaria os usuários.
+1. Check the list of issues to see if your suggestion already exists.
+2. Create a new issue using the feature request template.
+3. Clearly describe the improvement and how it would benefit users.
 
 ### Pull Requests
 
-1. Faça um fork do repositório.
-2. Crie um branch para sua feature (`git checkout -b feature/nome-da-feature`).
-3. Implemente suas mudanças e adicione testes se necessário.
-4. Certifique-se de que o código segue nosso estilo de código.
-5. Atualize a documentação conforme necessário.
-6. Envie um pull request para o branch `main`.
+1. Fork the repository.
+2. Create a branch for your feature (`git checkout -b feature/feature-name`).
+3. Implement your changes and add tests if necessary.
+4. Ensure the code follows our coding style.
+5. Update documentation as needed.
+6. Submit a pull request to the `main` branch.
 
-## Diretrizes para Desenvolvimento
+## Development Guidelines
 
-### Padrões de Código
+### Code Standards
 
-- Mantenha o código limpo e bem documentado.
-- Siga as melhores práticas para Dockerfiles.
-- Teste suas alterações antes de enviar.
+- Keep the code clean and well documented.
+- Follow best practices for Dockerfiles.
+- Test your changes before submitting.
 
-### Processo de Revisão
+### Review Process
 
-- Pelo menos um mantenedor deve aprovar o pull request.
-- Feedback será dado em até 7 dias úteis.
-- Mudanças podem ser solicitadas antes da aprovação.
+- At least one maintainer must approve the pull request.
+- Feedback will be provided within 7 business days.
+- Changes may be requested before approval.
 
-## Versionamento
+## Versioning
 
-Seguimos [Versionamento Semântico](https://semver.org/lang/pt-BR/):
+We follow [Semantic Versioning](https://semver.org/):
 
-- MAJOR: mudanças incompatíveis
-- MINOR: adições de funcionalidades compatíveis
-- PATCH: correções de bugs compatíveis
+- MAJOR: incompatible changes
+- MINOR: backwards-compatible feature additions
+- PATCH: backwards-compatible bug fixes
 
-## Licença
+## License
 
-Ao contribuir, você concorda que suas contribuições serão licenciadas sob a mesma licença que o projeto.
+By contributing, you agree that your contributions will be licensed under the same license as the project.
 
-## Contato
+<!-- ## Contact
 
-Se tiver dúvidas, entre em contato conosco através de:
-- [E-mail](mailto:contato@eletriom.com.br)
-- [Discord](https://discord.gg/eletriom) 
+If you have questions, contact us via:
+
+- [Email](mailto:contato@eletriom.com.br)
+- [Discord](https://discord.gg/eletriom) -->

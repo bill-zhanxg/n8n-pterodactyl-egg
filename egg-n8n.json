@@ -1,162 +1,163 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
-    "meta": {
-        "version": "PTDL_v2",
-        "update_url": null
-    },
-    "exported_at": "2025-05-04T22:34:57-03:00",
-    "name": "n8n",
-    "author": "eletriom@eletriom.com.br",
-    "description": "n8n \u00e9 uma ferramenta de automa\u00e7\u00e3o de fluxo de trabalho que permite conectar diferentes servi\u00e7os e aplica\u00e7\u00f5es de maneira visual.",
-    "features": null,
-    "docker_images": {
-        "eletriom\/n8n:latest": "eletriom\/n8n:latest"
-    },
-    "file_denylist": [],
-    "startup": "\/usr\/bin\/tini -g -- \/entrypoint.sh",
-    "config": {
-        "files": "{}",
-        "startup": "{\r\n    \"done\": [\r\n        \"Iniciando n8n...\",\r\n        \"Editor is now listening\",\r\n        \"Webhook URL\"\r\n    ]\r\n}",
-        "logs": "{}",
-        "stop": "^C"
-    },
-    "scripts": {
-        "installation": {
-            "script": "#!\/bin\/bash\r\n# n8n Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assumindo que o usu\u00e1rio sabe o que est\u00e1 fazendo.\"\r\n    exit 0\r\nfi\r\n\r\n# Criando os diret\u00f3rios necess\u00e1rios\r\nmkdir -p \/mnt\/server\/.n8n\r\n\r\necho -e \"Instala\u00e7\u00e3o conclu\u00edda. A imagem Docker j\u00e1 cont\u00e9m todos os arquivos necess\u00e1rios.\"\r\nexit 0",
-            "container": "node:20-slim",
-            "entrypoint": "bash"
-        }
-    },
-    "variables": [
-        {
-            "name": "Vers\u00e3o do n8n",
-            "description": "Vers\u00e3o do n8n (deve corresponder \u00e0 vers\u00e3o da imagem Docker).",
-            "env_variable": "N8N_VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "User Uploaded Files",
-            "description": "Ignora o processo de instala\u00e7\u00e3o padr\u00e3o. 0 = desativado (padr\u00e3o), 1 = ativado",
-            "env_variable": "USER_UPLOAD",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "Tipo de Banco de Dados",
-            "description": "Tipo de banco de dados a ser usado. Valores: sqlite, mysqldb, postgresdb, mariadb",
-            "env_variable": "N8N_DB_TYPE",
-            "default_value": "sqlite",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:sqlite,mysqldb,postgresdb,mariadb",
-            "field_type": "text"
-        },
-        {
-            "name": "Timezone",
-            "description": "Fuso hor\u00e1rio para o servidor. Ex: America\/Sao_Paulo",
-            "env_variable": "TZ",
-            "default_value": "America\/Sao_Paulo",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Hostname",
-            "description": "O hostname para acessar o n8n externamente (para webhooks)",
-            "env_variable": "HOSTNAME",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Chave de Criptografia",
-            "description": "Chave de criptografia para dados sens\u00edveis (recomendado definir)",
-            "env_variable": "N8N_ENCRYPTION_KEY",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Basic Auth",
-            "description": "Ativar autentica\u00e7\u00e3o b\u00e1sica. true ou false",
-            "env_variable": "N8N_BASIC_AUTH_ACTIVE",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "Usu\u00e1rio Basic Auth",
-            "description": "Nome de usu\u00e1rio para autentica\u00e7\u00e3o b\u00e1sica",
-            "env_variable": "N8N_BASIC_AUTH_USER",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Senha Basic Auth",
-            "description": "Senha para autentica\u00e7\u00e3o b\u00e1sica",
-            "env_variable": "N8N_BASIC_AUTH_PASSWORD",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "N8N_SECURE_COOKIE",
-            "description": "Exige que os cookies sejam enviados apenas por HTTPS. Defina como 'false' se estiver usando HTTP.",
-            "env_variable": "N8N_SECURE_COOKIE",
-            "default_value": "false",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:true,false",
-            "field_type": "text"
-        },
-        {
-            "name": "Protocolo",
-            "description": "Protocolo a ser usado para acessar o n8n (http ou https)",
-            "env_variable": "N8N_PROTOCOL",
-            "default_value": "http",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:http,https",
-            "field_type": "text"
-        },
-        {
-            "name": "Enforce Settings File Permissions",
-            "description": "Aplicar permiss\u00f5es seguras para arquivos de configura\u00e7\u00e3o",
-            "env_variable": "N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:true,false",
-            "field_type": "text"
-        },
-        {
-            "name": "Ativar Task Runners",
-            "description": "Ativar os executores de tarefas (recomendado para vers\u00f5es futuras)",
-            "env_variable": "N8N_RUNNERS_ENABLED",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:true,false",
-            "field_type": "text"
-        }
-    ]
+	"_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+	"meta": {
+		"version": "PTDL_v2",
+		"update_url": null
+	},
+	"exported_at": "2025-10-19T14:18:45+11:00",
+	"name": "n8n",
+	"author": "contact@mail.bill-zhanxg.com",
+	"description": "n8n is a workflow automation tool that allows you to connect different services and applications visually.",
+	"features": null,
+	"docker_images": {
+		"billzhanxg/n8n-pterodactyl:latest": "billzhanxg/n8n-pterodactyl:latest",
+		"eletriom/n8n:latest": "eletriom/n8n:latest"
+	},
+	"file_denylist": [],
+	"startup": "/usr/bin/tini -g -- /entrypoint.sh",
+	"config": {
+		"files": "{}",
+		"startup": "{\r\n    \"done\": [\r\n        \"Starting n8n...\",\r\n        \"Editor is now listening\",\r\n        \"Webhook URL\"\r\n    ]\r\n}",
+		"logs": "{}",
+		"stop": "^C"
+	},
+	"scripts": {
+		"installation": {
+			"script": "#!/bin/bash\r\n# n8n Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assuming the user knows what they are doing.\"\r\n    exit 0\r\nfi\r\n\r\n# Creating the required directories\r\nmkdir -p /mnt/server/.n8n\r\n\r\necho -e \"Installation completed. The Docker image already contains all necessary files.\"\r\nexit 0",
+			"container": "node:slim",
+			"entrypoint": "bash"
+		}
+	},
+	"variables": [
+		{
+			"name": "n8n version",
+			"description": "Version of n8n (must match the version of the Docker image).",
+			"env_variable": "N8N_VERSION",
+			"default_value": "latest",
+			"user_viewable": true,
+			"user_editable": false,
+			"rules": "required|string",
+			"field_type": "text"
+		},
+		{
+			"name": "User Uploaded Files",
+			"description": "Bypasses the standard installation process. 0 = disabled (default), 1 = enabled",
+			"env_variable": "USER_UPLOAD",
+			"default_value": "0",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|boolean",
+			"field_type": "text"
+		},
+		{
+			"name": "Database Type",
+			"description": "Database type to use. Values: sqlite, mysqldb, postgresdb, mariadb",
+			"env_variable": "N8N_DB_TYPE",
+			"default_value": "postgresdb",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:sqlite,mysqldb,postgresdb,mariadb",
+			"field_type": "text"
+		},
+		{
+			"name": "Timezone",
+			"description": "Time zone for the server. Ex: America/Sao_Paulo",
+			"env_variable": "TZ",
+			"default_value": "Australia/Melbourne",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
+		},
+		{
+			"name": "Hostname",
+			"description": "The hostname to access n8n externally (for webhooks)",
+			"env_variable": "HOSTNAME",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
+		},
+		{
+			"name": "Encryption Key",
+			"description": "Encryption key for sensitive data (recommended definer)",
+			"env_variable": "N8N_ENCRYPTION_KEY",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
+		},
+		{
+			"name": "Basic Auth",
+			"description": "Enable basic authentication. true or false",
+			"env_variable": "N8N_BASIC_AUTH_ACTIVE",
+			"default_value": "true",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:true,false",
+			"field_type": "text"
+		},
+		{
+			"name": "Basic Auth User",
+			"description": "Username for basic authentication",
+			"env_variable": "N8N_BASIC_AUTH_USER",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
+		},
+		{
+			"name": "Basic Auth Password",
+			"description": "Password for basic authentication",
+			"env_variable": "N8N_BASIC_AUTH_PASSWORD",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
+		},
+		{
+			"name": "N8N_SECURE_COOKIE",
+			"description": "Requires cookies to be sent only over HTTPS. Set to 'false' if using HTTP.",
+			"env_variable": "N8N_SECURE_COOKIE",
+			"default_value": "false",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:true,false",
+			"field_type": "text"
+		},
+		{
+			"name": "Protocol",
+			"description": "Protocol to use to access n8n (http or https)",
+			"env_variable": "N8N_PROTOCOL",
+			"default_value": "http",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:http,https",
+			"field_type": "text"
+		},
+		{
+			"name": "Enforce Settings File Permissions",
+			"description": "Apply secure permissions to configuration files",
+			"env_variable": "N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS",
+			"default_value": "true",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:true,false",
+			"field_type": "text"
+		},
+		{
+			"name": "Enable Task Runners",
+			"description": "Enable task runners (recommended for future releases)",
+			"env_variable": "N8N_RUNNERS_ENABLED",
+			"default_value": "true",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:true,false",
+			"field_type": "text"
+		}
+	]
 }

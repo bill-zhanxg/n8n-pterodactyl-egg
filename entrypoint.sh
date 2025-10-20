@@ -41,10 +41,24 @@ else
     echo "Warning: HOSTNAME or N8N_PORT not set. Webhook URL not configured automatically."
 fi
 
+# Set VUE_APP_URL_BASE_API for frontend
+if [ -n "${VUE_APP_URL_BASE_API}" ]; then
+    export VUE_APP_URL_BASE_API="${VUE_APP_URL_BASE_API}"
+    echo "VUE_APP_URL_BASE_API: ${VUE_APP_URL_BASE_API}"
+fi
+
+# Set WEBHOOK_URL and automatically configure proxy hops
+if [ -n "${WEBHOOK_URL}" ]; then
+    export WEBHOOK_URL="${WEBHOOK_URL}"
+    export N8N_PROXY_HOPS=1
+    echo "Webhook URL: ${WEBHOOK_URL}"
+    echo "Auto-configured N8N_PROXY_HOPS: ${N8N_PROXY_HOPS}"
+fi
+
 # Timezone configuration
-if [ -n "${GENERIC_TIMEZONE}" ]; then
-    export TZ=${GENERIC_TIMEZONE}
-    echo "Timezone set to: ${TZ}"
+if [ -n "${TZ}" ]; then
+    export GENERIC_TIMEZONE=${TZ}
+    echo "Timezone set to: ${GENERIC_TIMEZONE}"
 fi
 
 # Use SQLite if configured

@@ -158,6 +158,26 @@
 			"user_editable": true,
 			"rules": "required|string|in:true,false",
 			"field_type": "text"
+		},
+		{
+			"name": "VUE_APP_URL_BASE_API",
+			"description": "Base API URL for n8n frontend (e.g., https://n8n.example.com/)",
+			"env_variable": "VUE_APP_URL_BASE_API",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
+		},
+		{
+			"name": "Webhook URL",
+			"description": "External webhook URL (e.g., https://n8n.example.com/). Auto-enables proxy hops when set.",
+			"env_variable": "WEBHOOK_URL",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "nullable|string",
+			"field_type": "text"
 		}
 	]
 }

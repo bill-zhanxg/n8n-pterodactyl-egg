@@ -51,12 +51,12 @@
 		},
 		{
 			"name": "Database Type",
-			"description": "Database type to use. Values: sqlite, mysqldb, postgresdb, mariadb",
+			"description": "Database type to use. Values: sqlite, postgresdb",
 			"env_variable": "N8N_DB_TYPE",
-			"default_value": "postgresdb",
+			"default_value": "sqlite",
 			"user_viewable": true,
 			"user_editable": true,
-			"rules": "required|string|in:sqlite,mysqldb,postgresdb,mariadb",
+			"rules": "required|string|in:sqlite,postgresdb",
 			"field_type": "text"
 		},
 		{

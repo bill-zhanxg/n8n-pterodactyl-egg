@@ -28,7 +28,7 @@ RUN npm install -g --omit=dev n8n@${N8N_VERSION} --ignore-scripts \
 
 # Download the task-runner-launcher
 ARG TARGETPLATFORM
-ARG LAUNCHER_VERSION=1.4.0
+ARG LAUNCHER_VERSION=1.4.2
 COPY n8n-task-runners.json /etc/n8n-task-runners.json
 RUN \
     if [ "$TARGETPLATFORM" = "linux/amd64" ]; then export ARCH_NAME="amd64"; \
